@@ -41,7 +41,7 @@ def upload(**kwargs):
 with DAG('e2e_pipeline',
          description='Extract, transform, validate, and upload mental health survey data',
          default_args={'owner': 'airflow'},
-         start_date=datetime(2023, 1, 1),
+         start_date=datetime(2025, 1, 1),
          schedule_interval='@daily',
          catchup=False) as dag:
 

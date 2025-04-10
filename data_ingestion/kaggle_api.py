@@ -8,6 +8,7 @@ DATA_DIR = 'data'
 def main():
     # Download latest version of the dataset
     cache_path = kagglehub.dataset_download("osmi/mental-health-in-tech-survey")
+    # cache_path = kagglehub.dataset_download("osmi/mental-health-in-tech-survey")
     print("Downloaded to cache:", cache_path)
     
     # Ensure DATA_DIR exists
