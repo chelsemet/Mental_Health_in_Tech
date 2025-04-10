@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+
+  redis:
+    image: redis:latest
+
+  airflow-webserver:
+    image: apache/airflow:2.8.1
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__WEBSERVER__SECRET_KEY: 'secret'
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'false'
+    volumes:
+      - ./data_ingestion:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+      - ./requirements.txt:/requirements.txt
+      - ./.credentials:/opt/airflow/.credentials
+    ports:
+      - "8080:8080"
+    command: webserver
+
+  airflow-scheduler:
+    image: apache/airflow:2.8.1
+    restart: always
+    depends_on:
+      - airflow-webserver
+    volumes:
+      - ./data_ingestion:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+      - ./requirements.txt:/requirements.txt
+      - ./.credentials:/opt/airflow/.credentials
+    command: scheduler
