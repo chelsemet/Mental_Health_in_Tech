@@ -27,7 +27,7 @@ services:
       - _AIRFLOW_WWW_USER_PASSWORD=admin
     volumes:
       - ./data_ingestion:/opt/airflow/dags
-      - ./data:/opt/airflow/data
+      - ./data:/opt/airflow/data:rw
       - ./requirements.txt:/requirements.txt
       - ./.credentials:/opt/airflow/.credentials
     command: >
@@ -46,16 +46,15 @@ services:
     environment:
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres/airflow
-      # Use the same Fernet key as in airflow-init
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__WEBSERVER__SECRET_KEY=secret
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
-      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/google-credentials.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/kestra-sandbox-450921-fb266ce7fa8c.json
       - KAGGLE_CONFIG_DIR=/opt/airflow/.credentials
     volumes:
       - ./data_ingestion:/opt/airflow/dags
-      - ./data:/opt/airflow/data
+      - ./data:/opt/airflow/data:rw
       - ./requirements.txt:/requirements.txt
       - ./.credentials:/opt/airflow/.credentials
     ports:
@@ -75,11 +74,11 @@ services:
       - AIRFLOW__WEBSERVER__SECRET_KEY=secret
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
-      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/google-credentials.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/kestra-sandbox-450921-fb266ce7fa8c.json
       - KAGGLE_CONFIG_DIR=/opt/airflow/.credentials
     volumes:
       - ./data_ingestion:/opt/airflow/dags
-      - ./data:/opt/airflow/data
+      - ./data:/opt/airflow/data:rw
       - ./requirements.txt:/requirements.txt
       - ./.credentials:/opt/airflow/.credentials
     command: scheduler
