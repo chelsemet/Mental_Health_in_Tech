@@ -47,7 +47,7 @@ def upload(**kwargs):
             field="Age",
             range_=bigquery.PartitionRange(start=0, end=100, interval=10)
         ),
-        clustering_fields=["Country", "tech_company", "Gender"]
+        clustering_fields=["Country", "tech_company", "gender_clean"]
     )
     
     # Upload DataFrame

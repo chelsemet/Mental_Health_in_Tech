@@ -59,7 +59,9 @@ services:
       - ./.credentials:/opt/airflow/.credentials
     ports:
       - "8080:8080"
-    command: webserver
+    command: >
+          bash -c "pip install -r /requirements.txt &&
+          airflow webserver"
 
   airflow-scheduler:
     image: apache/airflow:2.8.1
@@ -69,7 +71,6 @@ services:
     environment:
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres/airflow
-      # Use the same Fernet key as in other services
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__WEBSERVER__SECRET_KEY=secret
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
@@ -81,4 +82,6 @@ services:
       - ./data:/opt/airflow/data:rw
       - ./requirements.txt:/requirements.txt
       - ./.credentials:/opt/airflow/.credentials
-    command: scheduler
+    command: >
+          bash -c "pip install -r /requirements.txt &&
+          airflow scheduler"

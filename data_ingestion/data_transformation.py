@@ -7,7 +7,7 @@ Created on Mon Mar 31
 """
 
 def covariance(df, **kwargs): 
-    import sklearn
+    from sklearn import preprocessing
     import pandas as pd
 
     DATA_DIR = '/opt/airflow/data'
@@ -15,7 +15,7 @@ def covariance(df, **kwargs):
     #Encoding data
     labelDict = {}
     for feature in df:
-        le = sklearn.preprocessing.LabelEncoder()
+        le = preprocessing.LabelEncoder()
         le.fit(df[feature])
         le_name_mapping = dict(zip(le.classes_, le.transform(le.classes_)))
         df[feature] = le.transform(df[feature])
@@ -33,3 +33,6 @@ def covariance(df, **kwargs):
     cov_df.columns = ['variable1', 'variable2', 'covariance']
 
     return cov_df
+
+def transforms():
+    pass
