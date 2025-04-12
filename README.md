@@ -53,9 +53,9 @@ https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
 ```bash
   docker-compose up --build
 ```
-- Access the Airflow webserver by visiting http://localhost:8080 in your web browser.
-  default username: admin
-  default password: admin
+- Access the Airflow webserver by visiting http://localhost:8080 in your web browser.<br>
+  default username: admin<br>
+  default password: admin<br>
 
 ## DAG pipeline
 You can now check the status of the pipeline:<br>
