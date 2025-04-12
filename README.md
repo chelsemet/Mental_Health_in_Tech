@@ -16,15 +16,15 @@ Programming Language: Python
 https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
 
 ## Usage
-- Set up a GCP project
+- Set up a GCP project<br>
   ![image](https://github.com/user-attachments/assets/16ae08fe-ec2b-46b7-a6ff-34abf498e682)
 
-- Create a virtual machine instance (VM)
+- Create a virtual machine instance (VM)<br>
   ![image](https://github.com/user-attachments/assets/42d270e7-0caf-48af-a906-ec653e70d77e)
 
 - Create SSH Keys and Access VM Remotely
 
-- Create your dataset in BigQuery
+- Create your dataset in BigQuery<br>
   ![image](https://github.com/user-attachments/assets/debf9503-a818-44d6-bdd8-bc74fa58dc1b)
 
 - Get docker installed on your VM instance
@@ -51,8 +51,8 @@ https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
 
 ## Visualization
 https://lookerstudio.google.com/reporting/1deb713d-5309-427a-89af-d493c36d304c
-
+<br> 
 ![image](https://github.com/user-attachments/assets/8237f3ad-2d57-4abd-9a5f-7be35ed6aadf)
-
+<br> 
 ![image](https://github.com/user-attachments/assets/a80b8b59-5e46-474c-8705-aa10cb19439e)
 
