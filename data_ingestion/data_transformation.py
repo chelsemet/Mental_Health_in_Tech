@@ -55,13 +55,12 @@ def transforms(input_path, output_path, **kwargs):
     df_clean = df_clean.withColumn("risk_factors", 
         (when(col("work_interfere").isin("Often", "Sometimes"), 1).otherwise(0) + 
         when(col("family_history") == "Yes", 1).otherwise(0) + 
-        when(col("care_options") == "Yes", 1).otherwise(0) + 
-        when(col("benefits") == "Yes", 1).otherwise(0) + 
+        when(col("care_options") == "No", 1).otherwise(0) + 
+        when(col("benefits") == "No", 1).otherwise(0) + 
         when(col("obs_consequence") == "Yes", 1).otherwise(0) + 
-        when(col("anonymity") == "Yes", 1).otherwise(0) +
-        when(col("mental_health_interview").isin("Yes", "Maybe"), 1).otherwise(0) + 
-        when(col("wellness_program") == "Yes", 1).otherwise(0) +
-        when(col("seek_help") == "Yes", 1).otherwise(0)
+        when(col("anonymity") == "No", 1).otherwise(0) +
+        when(col("wellness_program") == "No", 1).otherwise(0) +
+        when(col("seek_help") == "No", 1).otherwise(0)
     ))
 
     # normalize result by age
