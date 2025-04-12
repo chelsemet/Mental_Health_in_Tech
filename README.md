@@ -1,13 +1,13 @@
 # Mental_Health_in_Tech_DE_project
 
 ## Introduction
-Cloud: Google Cloud
-Dataset: Kaggle
-Infrastructure: Terraform
-Workflow Orchestration: Apache Airflow
-Data Warehouse: Google BigQuery
-Transformation: Spark
-Visualisation: Looker Studio
+Cloud: Google Cloud<br>
+Dataset: Kaggle<br>
+Infrastructure: Terraform<br>
+Workflow Orchestration: Apache Airflow<br>
+Data Warehouse: Google BigQuery<br>
+Transformation: Spark<br>
+Visualisation: Looker Studio<br>
     
 ## Problem Description
 
