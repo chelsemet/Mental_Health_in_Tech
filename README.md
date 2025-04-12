@@ -8,9 +8,10 @@ Workflow Orchestration: Apache Airflow
 Data Warehouse: Google BigQuery
 Transformation: Spark
 Visualisation: Looker Studio
-Programming Language: Python
     
 ## Problem Description
+
+## Project Architecture
 
 ## Dataset
 https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
@@ -30,7 +31,7 @@ https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
 - Get docker installed on your VM instance
   Tutorial: https://docs.docker.com/compose/install/
 
-- clone this repository on your VM instance
+- Clone this repository on your VM instance
   ```bash
   cd Mental_Health_in_Tech
   ```
@@ -40,14 +41,28 @@ https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
   ```bash
   ~/.kaggle/kaggle.json
   ```
-- run kaggle_api.py to download the data
+- Run kaggle_api.py to download the data
 ```bash
   python3 data_ingestion/kaggle_api.py
 ```
+- Download your google credentials and save it to
+```bash
+    .credentials/google_credentials.json
+```  
 - Build the docker image
 ```bash
   docker-compose up --build
 ```
+- Access the Airflow webserver by visiting http://localhost:8080 in your web browser.
+  default username: admin
+  default password: admin
+
+## DAG pipeline
+You can now check the status of the pipeline:<br>
+![image](https://github.com/user-attachments/assets/2ccdee5a-d9ee-4097-a29b-85df9aa9165a)
+
+This is the DAG workflow graph
+![image](https://github.com/user-attachments/assets/065feb83-98ff-4d0f-96cf-ece6fa1727fa)
 
 ## Visualization
 https://lookerstudio.google.com/reporting/1deb713d-5309-427a-89af-d493c36d304c
