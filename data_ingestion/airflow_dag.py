@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 31
+
+@author: chelsemet
+"""
+
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from google.cloud import bigquery
@@ -7,31 +15,34 @@ import pandas as pd
 
 from data_cleaning import data_cleaning
 from data_transformation import covariance
+from data_transformation import transforms
 
 DATA_DIR = '/opt/airflow/data'
 
 def clean(**kwargs):
-    df = pd.read_csv(f'{DATA_DIR}/survey.csv')
-    df = data_cleaning(df)
-    df.to_csv(f'{DATA_DIR}/clean.csv', index=False)
+    data_cleaning(f'{DATA_DIR}/survey.csv', f'{DATA_DIR}/clean.csv')
 
 def transform(**kwargs):
-    df = pd.read_csv(f'{DATA_DIR}/clean.csv')
-    cov_df = covariance(df)
-    cov_df.to_csv(f'{DATA_DIR}/covariance.csv', index=False)
+    covariance(f'{DATA_DIR}/clean.csv', f'{DATA_DIR}/correlation.csv')
+    transforms(f'{DATA_DIR}/clean.csv', f'{DATA_DIR}/pca.csv')
 
 def validate(**kwargs):
     df = pd.read_csv(f'{DATA_DIR}/clean.csv')
+    corr_df = pd.read_csv(f'{DATA_DIR}/correlation.csv')
+    pca_df = pd.read_csv(f'{DATA_DIR}/pca.csv')
+    
     if df.empty:
         raise ValueError("Data validation failed: Empty file")
-    cov_df = pd.read_csv(f'{DATA_DIR}/covariance.csv')
-    if cov_df.empty:
+    if corr_df.empty:
+        raise ValueError("Data validation failed: Empty file")
+    if pca_df.empty:
         raise ValueError("Data validation failed: Empty file")
 
 def upload(**kwargs):
     # Example DataFrame
     df = pd.read_csv(f'{DATA_DIR}/clean.csv')
-    cov_df = pd.read_csv(f'{DATA_DIR}/covariance.csv')
+    corr_df = pd.read_csv(f'{DATA_DIR}/correlation.csv')
+    pca_df = pd.read_csv(f'{DATA_DIR}/pca.csv')
 
     # Initialize client
     client = bigquery.Client()
@@ -61,9 +72,16 @@ def upload(**kwargs):
         autodetect=True
     )
 
-    table_id = "kestra-sandbox-450921.mental_health_survey.covariance"
+    table_id = "kestra-sandbox-450921.mental_health_survey.correlation"
 
-    job = client.load_table_from_dataframe(cov_df, table_id, job_config=job_config)
+    job = client.load_table_from_dataframe(corr_df, table_id, job_config=job_config)
+    
+    job.result()
+    print("Data uploaded to BigQuery successfully:", table_id)
+
+    table_id = "kestra-sandbox-450921.mental_health_survey.pca_result"
+
+    job = client.load_table_from_dataframe(pca_df, table_id, job_config=job_config)
     
     job.result()
     print("Data uploaded to BigQuery successfully:", table_id)

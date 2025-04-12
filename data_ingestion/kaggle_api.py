@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 31
+
+@author: chelsemet
+"""
+
 import kagglehub
 import shutil
 from pathlib import Path

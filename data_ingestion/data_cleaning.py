@@ -6,10 +6,10 @@ Created on Mon Mar 31
 @author: chelsemet
 """
 
-def data_cleaning(df, **kwargs):
+def data_cleaning(input_path, output_path, **kwargs):
     import pandas as pd
 
-    DATA_DIR = '/opt/airflow/data'
+    df = pd.read_csv(input_path)
 
     # Data cleaning
     df = df.drop(['comments','state','Timestamp'], axis = 1)
@@ -56,4 +56,4 @@ def data_cleaning(df, **kwargs):
     df['work_interfere'] = df['work_interfere'].fillna('Don\'t know')
     df['self_employed'] = df['self_employed'].fillna('Don\'t know')
 
-    return df
+    df.to_csv(output_path, index=False)
