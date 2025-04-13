@@ -80,7 +80,7 @@ https://lookerstudio.google.com/reporting/1deb713d-5309-427a-89af-d493c36d304c
   2. care_options: Do you know the options for mental health care your employer provides?
   3. benefits: Does your employer provide mental health benefits?
   4. obs_consequence: Have you heard of or observed negative consequences for coworkers with mental health conditions in your workplace?
-  5. anonymity: Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources?
+  5. anonymity: Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources?<br>
   ...
   
 - There appears to be some separation between the "Yes" and "No" treatment groups, though there's significant overlap. The "Yes" group tends to cluster more toward the upper left side of the plot, while the "No" group tends toward the lower right.
