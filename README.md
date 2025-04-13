@@ -1,4 +1,7 @@
 # Mental_Health_in_Tech_DE_project
+
+## Introduction
+This is the final project of [Data Engineering Zoomcamp 2025](https://github.com/DataTalksClub/data-engineering-zoomcamp).
     
 ## Problem Description
 The tech industry's unique workplace dynamics, including high pressure environments, long hours, and remote work, create distinct mental health challenges. Tech companies need more data-driven insights about how workplace factors, company policies, and demographics influence mental health outcomes and treatment-seeking behaviors among employees. 
@@ -27,18 +30,21 @@ https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
 - Create a virtual machine instance (VM)<br>
   ![image](https://github.com/user-attachments/assets/42d270e7-0caf-48af-a906-ec653e70d77e)
 
-- Create SSH Keys and Access VM Remotely
+- Create SSH keys and access VM Remotely
 
-- Get docker installed on your VM instance
+- Get docker installed on your VM instance<br>
   Tutorial: https://docs.docker.com/compose/install/
 
 - Clone this repository on your VM instance
   ```bash
+  git clone https://github.com/chelsemet/Mental_Health_in_Tech.git
+  ```
+  ```bash
   cd Mental_Health_in_Tech
   ```
-- Setup your kaggle API
+- Setup your kaggle API<br>
   Follow the instruction provided by kaggle: https://www.kaggle.com/docs/api#authentication
-  Place your token in your VM instance at
+- Place your token in your VM instance at
   ```bash
   ~/.kaggle/kaggle.json
   ```
