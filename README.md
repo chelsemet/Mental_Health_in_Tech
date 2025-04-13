@@ -1,17 +1,19 @@
 # Mental_Health_in_Tech_DE_project
+    
+## Problem Description
+The tech industry's unique workplace dynamics, including high pressure environments, long hours, and remote work, create distinct mental health challenges. Tech companies need more data-driven insights about how workplace factors, company policies, and demographics influence mental health outcomes and treatment-seeking behaviors among employees. 
 
-## Introduction
-Cloud: Google Cloud<br>
+This project aims to identify key factors correlated with treatment-seeking behavior.
+
+## Project Architecture
 Dataset: Kaggle<br>
 Infrastructure: Terraform<br>
+Cloud: Google Cloud<br>
 Workflow Orchestration: Apache Airflow<br>
 Data Warehouse: Google BigQuery<br>
 Transformation: Spark<br>
 Visualisation: Looker Studio<br>
-    
-## Problem Description
 
-## Project Architecture
 
 ## Dataset
 https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
@@ -71,3 +73,16 @@ https://lookerstudio.google.com/reporting/1deb713d-5309-427a-89af-d493c36d304c
 <br> 
 ![image](https://github.com/user-attachments/assets/a80b8b59-5e46-474c-8705-aa10cb19439e)
 
+##Conclusion
+- The key factors include:
+  1. family_history: Do you have a family history of mental illness?
+  2. care_options: Do you know the options for mental health care your employer provides?
+  3. benefits: Does your employer provide mental health benefits?
+  4. obs_consequence: Have you heard of or observed negative consequences for coworkers with mental health conditions in your workplace?
+  5. anonymity: Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources?
+  ...
+  
+- There appears to be some separation between the "Yes" and "No" treatment groups, though there's significant overlap. The "Yes" group tends to cluster more toward the upper left side of the plot, while the "No" group tends toward the lower right.
+-The overlap between the two groups indicates that the features you've captured don't perfectly predict treatment status. This suggests that seeking mental health treatment in tech environments is influenced by factors beyond what's represented in the principal components.
+- National differences seem less influential than individual factors or perhaps industry-specific factors that transcend national boundaries.
+The partial separation indicates that PCA has captured some meaningful signal, but additional features or analysis approaches might be needed to better understand the factors influencing mental health treatment decisions in tech environments.
