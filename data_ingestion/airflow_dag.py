@@ -11,6 +11,7 @@ from airflow.operators.python import PythonOperator
 from google.cloud import bigquery
 from datetime import datetime
 import pandas as pd
+import os
 
 
 from data_cleaning import data_cleaning
@@ -18,6 +19,8 @@ from data_transformation import covariance
 from data_transformation import transforms
 
 DATA_DIR = '/opt/airflow/data'
+project_id = os.environ.get('PROJECT_ID')
+dataset_id = os.environ.get('DATASET_ID')
 
 def clean(**kwargs):
     data_cleaning(f'{DATA_DIR}/survey.csv', f'{DATA_DIR}/clean.csv')
@@ -48,7 +51,7 @@ def upload(**kwargs):
     client = bigquery.Client()
 
     # Set your table ID: 'project.dataset.table'
-    table_id = "kestra-sandbox-450921.mental_health_survey.clean_data"
+    table_id = f"{project_id}.{dataset_id}.clean_data"
 
     # Configure the load job
     job_config = bigquery.LoadJobConfig(
@@ -72,14 +75,14 @@ def upload(**kwargs):
         autodetect=True
     )
 
-    table_id = "kestra-sandbox-450921.mental_health_survey.correlation"
+    table_id = f"{project_id}.{dataset_id}.correlation"
 
     job = client.load_table_from_dataframe(corr_df, table_id, job_config=job_config)
     
     job.result()
     print("Data uploaded to BigQuery successfully:", table_id)
 
-    table_id = "kestra-sandbox-450921.mental_health_survey.pca_result"
+    table_id = f"{project_id}.{dataset_id}.pca_result"
 
     job = client.load_table_from_dataframe(pca_df, table_id, job_config=job_config)
     

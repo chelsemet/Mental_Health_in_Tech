@@ -15,6 +15,13 @@ RUN JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java)))) \
     && echo "export JAVA_HOME=$JAVA_HOME" >> /home/airflow/.bashrc \
     && echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> /home/airflow/.bashrc
 
+# Add terraform
+RUN apt-get update && apt-get install -y wget unzip \
+    && wget https://releases.hashicorp.com/terraform/1.7.0/terraform_1.7.0_linux_amd64.zip \
+    && unzip terraform_1.7.0_linux_amd64.zip \
+    && mv terraform /usr/local/bin/ \
+    && rm terraform_1.7.0_linux_amd64.zip
+
 # Set environment variables for this session
 ENV JAVA_HOME=/usr/lib/jvm/default-java
 ENV PATH="${JAVA_HOME}/bin:${PATH}"

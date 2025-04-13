@@ -11,28 +11,15 @@ services:
   redis:
     image: redis:latest
 
-  # airflow-init:
-  #   build: .
-  #   depends_on:
-  #     - postgres
-  #   environment:
-  #     - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
-  #     - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
-  #     - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
-  #     - AIRFLOW__CORE__LOAD_EXAMPLES=false
-  #     - AIRFLOW__WEBSERVER__SECRET_KEY=secret
-  #     - _AIRFLOW_DB_UPGRADE=true
-  #     - _AIRFLOW_WWW_USER_CREATE=true
-  #     - _AIRFLOW_WWW_USER_USERNAME=admin
-  #     - _AIRFLOW_WWW_USER_PASSWORD=admin
-  #   volumes:
-  #     - ./data_ingestion:/opt/airflow/dags
-  #     - ./data:/opt/airflow/data:rw
-  #     - ./requirements.txt:/requirements.txt
-  #     - ./.credentials:/opt/airflow/.credentials
-  #   command: >
-  #         bash -c "pip install -r /requirements.txt &&
-  #   restart: on-failure
+  terraform:
+    build: .
+    volumes:
+      - ./terraform:/terraform
+      - ./.credentials:/opt/airflow/.credentials
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/google_credentials.json
+    command: >
+      bash -c "cd /terraform && chmod 777 && terraform init && terraform apply -auto-approve"
 
   airflow-webserver:
     build: .
@@ -40,6 +27,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - terraform
     environment:
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres/airflow
@@ -47,8 +35,10 @@ services:
       - AIRFLOW__WEBSERVER__SECRET_KEY=secret
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
-      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/kestra-sandbox-450921-fb266ce7fa8c.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/google_credentials.json
       - KAGGLE_CONFIG_DIR=/opt/airflow/.credentials
+      - PROJECT_ID=kestra-sandbox-450921
+      - DATASET_ID=mental_health_survey
     volumes:
       - ./data_ingestion:/opt/airflow/dags
       - ./data:/opt/airflow/data:rw
@@ -74,8 +64,10 @@ services:
       - AIRFLOW__WEBSERVER__SECRET_KEY=secret
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
-      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/kestra-sandbox-450921-fb266ce7fa8c.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/.credentials/google_credentials.json
       - KAGGLE_CONFIG_DIR=/opt/airflow/.credentials
+      - PROJECT_ID=kestra-sandbox-450921
+      - DATASET_ID=mental_health_survey
     volumes:
       - ./data_ingestion:/opt/airflow/dags
       - ./data:/opt/airflow/data:rw
