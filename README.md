@@ -14,6 +14,7 @@ Data Warehouse: Google BigQuery<br>
 Transformation: Spark<br>
 Visualisation: Looker Studio<br>
 
+![image](https://github.com/user-attachments/assets/9de38e7f-b6d0-4c0f-816d-713368226c63)
 
 ## Dataset
 This dataset is from a 2014 survey that measures attitudes towards mental health and frequency of mental health disorders in the tech workplace.<br>
@@ -27,9 +28,6 @@ https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey
   ![image](https://github.com/user-attachments/assets/42d270e7-0caf-48af-a906-ec653e70d77e)
 
 - Create SSH Keys and Access VM Remotely
-
-- Create your dataset in BigQuery<br>
-  ![image](https://github.com/user-attachments/assets/debf9503-a818-44d6-bdd8-bc74fa58dc1b)
 
 - Get docker installed on your VM instance
   Tutorial: https://docs.docker.com/compose/install/
