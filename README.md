@@ -74,7 +74,7 @@ https://lookerstudio.google.com/reporting/1deb713d-5309-427a-89af-d493c36d304c
 <br> 
 ![image](https://github.com/user-attachments/assets/a80b8b59-5e46-474c-8705-aa10cb19439e)
 
-##Conclusion
+## Conclusion
 - The key factors include:
   1. family_history: Do you have a family history of mental illness?
   2. care_options: Do you know the options for mental health care your employer provides?
